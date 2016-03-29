@@ -143,14 +143,19 @@
         function showPopUp() {
                 var div = document.createElement('div');       // Create the new div element for the alert
                 // Set basic properties of the div
+                div.style.position = 'absolute';
                 div.style.width = '60%';
                 div.style.height = '120px';
-                div.style.position = 'absolute';                
                 div.style.top = '10px';
-                div.style.transform = 'translate(50%)';
+                div.style.transform = 'translateX(33%)';       // Center
                 
-                div.style.backgroundColor = '#B3E4FD';
+                //div.style.backgroundColor = '#B3E4FD';
+                div.style.background-image: url('https://raw.githubusercontent.com/allenvanderlinde/opsmarter/master/opbg.png');
+                div.border-style: solid;
+                div.border-width: 1px;
+                div.border-color: #0070d2;
                 
+                /* Text formatting. */
                 div.style.textAlign = 'center';
                 div.style.verticalAlign = 'middle';
                 div.style.textJustify = 'center';
