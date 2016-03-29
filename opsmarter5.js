@@ -150,10 +150,10 @@
                 div.style.transform = 'translateX(33%)';       // Center
                 
                 //div.style.backgroundColor = '#B3E4FD';
-                div.style.background-image: url('https://raw.githubusercontent.com/allenvanderlinde/opsmarter/master/opbg.png');
-                div.border-style: solid;
-                div.border-width: 1px;
-                div.border-color: #0070d2;
+                div.style.backgroundImage = 'url(\'https://raw.githubusercontent.com/allenvanderlinde/opsmarter/master/opbg.png\')';
+                div.style.borderStyle = 'solid';
+                div.style.borderWidth = '1px';
+                div.style.borderColor = '#0070d2';
                 
                 /* Text formatting. */
                 div.style.textAlign = 'center';
