@@ -54,7 +54,11 @@
                                         div_ClientID.innerHTML = OpSmartLink + '<span class="btnImportant" style="margin: 0px 0px 6px 6px; padding-top:4px;">SDM COMPLEX CLIENT</span></a>';
                                 } */
                                 else {
-                                        div_ClientID.innerHTML = OpSmartLink + '<span class="btnCancel" style="margin: 0px 0px 6px 6px; padding-top:4px;">' + String(ClientTypeFromArray[0]) + '</span></a>'; 
+                                        if(ClientTypeFromArray[0] == '--') {       // Possible Self-Hosted client
+                                                div_ClientID.innerHTML = OpSmartLink + '</a><span style="margin: 0px 0px 6px 6px; padding-top:4px; border-style: solid; border-width: 1px; border-radius: 5px; padding: 3px; font-size: .85em; font-weight: bold; background-image: url(\'https://raw.githubusercontent.com/allenvanderlinde/opsmarter/master/sh.png\')">Possible Self-Hosted</span>';
+                                        } else {       // Silver, Gold, Platinum client
+                                               div_ClientID.innerHTML = OpSmartLink + '<span class="btnCancel" style="margin: 0px 0px 6px 6px; padding-top:4px;">' + String(ClientTypeFromArray[0]) + '</span></a>'; 
+                                        }
                                 }
                         }
                 });
@@ -130,18 +134,20 @@
                Compare Primary Group and Initial Case Owner strings to decide whether to alert.
         */
         /* Rough copy. */
-        var alertString = "Alternate Group needs to be changed.";
         var primaryGroup = document.getElementById('00N70000002jOBk_ileinner').innerHTML;
         var initialCaseOwner = document.getElementById('00N70000002jOBI_ileinner').innerHTML;
         //if(primaryGroup != initialCaseOwner) {
         if(primaryGroup == initialCaseOwner) {
-                var alert = "Primary Group: " + primaryGroup + "\nInitial Case Owner: " + initialCaseOwner + "\n\n" + alertString;
                 showPopUp();
         }
         
         /* CSS-styled alert. */
         function showPopUp() {
-                var div = document.createElement('div');       // Create the new div element for the alert
+                var groups_alert = 'Check for correct/matching Primary Group.';
+                var keywords_alert = 'Hello, world!';
+                
+                /* Create the new div element for the alert. */
+                var div = document.createElement('div');
                 // Set basic properties of the div
                 div.style.position = 'absolute';
                 div.style.width = '60%';
@@ -153,22 +159,83 @@
                 div.style.backgroundImage = 'url(\'https://raw.githubusercontent.com/allenvanderlinde/opsmarter/master/opbg.png\')';
                 div.style.borderStyle = 'solid';
                 div.style.borderWidth = '1px';
-                div.style.borderColor = '#0070d2';
+                //div.style.borderColor = '#0070d2';
+                div.style.borderColor = '#0159a4';
+                
+                div.style.borderStyle = 'solid';
+                div.style.borderWidth = '1px';
+                div.style.boxSizing = 'border-box';
                 
                 /* Text formatting. */
                 div.style.textAlign = 'center';
                 div.style.verticalAlign = 'middle';
                 div.style.textJustify = 'center';
                 div.style.fontFamily = 'arial,sans-serif';
+                div.style.fontWeight = 'bold';
+                div.style.fontSize = '12pt';
+                div.style.letterSpacing = '-0.5px';
+                div.style.color = 'white';
 
                 // can style with CSS and concatenation here -->
-                div.innerHTML = alertString;       // Append the string to the div
-
+                div.innerHTML = '<p style=\"position: relative; top: 30px\">' + groups_alert + '</p>';
                 document.body.appendChild(div);       // Add the new alert div to the page
-                // Remove the div when clicked
+                
+                /* Build secondary notification div. */    
+                var div_b = document.createElement('div');
+                div_b.style.position = 'absolute';
+                div_b.style.width = '60%';
+                div_b.style.height = '120px';
+                div_b.style.top = '132px';
+                div_b.style.transform = 'translateX(33%)';
+                div_b.style.backgroundColor = '#3fa1f4';
+
+                div_b.style.borderStyle = 'solid';
+                div_b.style.borderWidth = '1px';
+                div_b.style.borderColor = div_b.style.backgroundColor;
+                div_b.style.boxSizing = 'border-box';
+
+                div_b.style.fontFamily = div.style.fontFamily;
+                div_b.style.fontSize = '10pt';
+                div_b.style.color = 'white';
+                
+                /* Search for team/business unit specific keywords. */
+                var caseDesc = document.getElementById('cas15_ileinner').innerHTML;
+                
+                var keywordsRegEx = /collaborate/i;
+                var n = caseDesc.search(keywordsRegEx);
+                if(n > 0)       // Occurrence of keyword found
+                        window.alert('found questions');
+
+                div_b.innerHTML = caseDesc;
+                document.body.appendChild(div_b);
+                
+                /* Register functions to elements. */
+                div_b.onclick = function() {
+                        fade(div_b, 'out');
+                }
+                
                 div.onclick = function() {
-                        div.style.display = 'none';
-                        document.body.removeChild(div);
+                        fade(div, 'out');
+                }
+        }
+        
+        /*
+               Aesthetic DOM functions.
+        */
+        function fade(element, option) {
+                var op;
+                var timer;
+                
+                if(option == 'out') {
+                        op = 1;
+                        timer = setInterval(function() {
+                                if(op <= 0.1) {
+                                        clearInterval(timer);
+                                        element.style.display = 'none';
+                                }
+                                element.style.opacity = op;
+                                op -= op * 0.1;
+                        }, 12);
                 }
         }
         
@@ -180,8 +247,4 @@
                 item.style.color = '#FF00FF';
         }
         */
-        
-        // jQuery -->
 })();
-//opens webpage in new tab
-//<a target="_blank" href="http://wikicentral.bbbb.net/display/CSOI/CH+-+Tier+1+Production+Environment+List"
