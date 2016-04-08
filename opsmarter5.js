@@ -21,8 +21,8 @@
         
         var status = document.getElementById('cas7_ileinner').innerHTML;
         
-        if(status == 'Closed') {
-                startup();
+        startup();
+        if((status == 'Assigned') || (status == 'New')) {       // Throw notification of mismatched groups only for New and Assigned cases
                 checkGroups();
         }
         
