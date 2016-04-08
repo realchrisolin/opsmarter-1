@@ -12,3 +12,8 @@ Future
 
 1. Access client list remotely from internal site or resource (remove hard-coded strings).
 2. Complete keyword search method and notify tech of possible case context/business unit via dynamically generated and styled divs.
+
+Special Thanks
+--------------
+
+A great many thanks to the Tier 1 Blackboard Technical Support team for helping to test this and for being an incredible team.
