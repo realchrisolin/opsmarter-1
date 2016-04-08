@@ -24,7 +24,6 @@
         if(status == 'Closed') {
                 startup();
                 checkGroups();
-                read();
         }
         
         /* Start-up checks. */
