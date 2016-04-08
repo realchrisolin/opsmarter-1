@@ -7,6 +7,11 @@ Currently universities and educational institutions are hard-coded; it's public 
 
 Note: Certain elements of the script refer to HTML objects that are not public and would need to be replaced to suit your purposes. The release of this script is intended to be a tutorial and demonstration of some of the cool things JavaScript can do.
 
+Requirements
+------------
+
+Currently this version of OpSmarter is compatible only with Mozilla Firefox with the Greasemonkey add-on and with Google Chrome with the Tampermonkey extension.
+
 Future
 ------
 
