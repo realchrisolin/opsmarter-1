@@ -52,13 +52,11 @@
                                                see if client has ICM. */
                                         ICMFromArray = AjaxArray[1].split('<span class="Alabels">');
                                         var ICMString = String(ICMFromArray[3]);
-                                        document.getElementById('cas15_ileinner').innerHTML = ICMString;
                                         
                                         var n = ICMString.indexOf('YES');
                                         if(n == 22) { // 22 = index of 'YES'
-                                                window.alert('ICM? --> Yes');
                                                 icm = true;
-                                        } else window.alert('ICM? --> No');
+                                        } else icm = false;
 
                                         // The below may change as Complex/SDM becomes a single business unit
                                         if ((ClientTypeFromArray[0]=='Diamond') || (ClientTypeFromArray[0]=='SDM')) {
@@ -68,7 +66,7 @@
 
                                         // Decide which button type to use
                                         if (complex || sdm) {
-                                                div_ClientID.innerHTML = OpSmartLink + '<span class="btnImportant" style="margin: 0px 0px 6px 6px; padding-top:4px;">SDM CLIENT</span></a>';
+                                                div_ClientID.innerHTML = OpSmartLink + '<span class="btnImportant" style="margin: 0px 0px 6px 6px; padding-top: 4px;">SDM CLIENT</span></a>';
                                         } else {
                                                 /* Possible Self-Hosted
                                                        or SaaS client. */
@@ -78,6 +76,11 @@
                                                 else {       /* Silver, Gold, Platinum client. */
                                                        div_ClientID.innerHTML = OpSmartLink + '<span class="btnCancel" style="margin: 0px 0px 6px 6px; padding-top:4px;">' + String(ClientTypeFromArray[0]) + '</span></a>'; 
                                                 }
+                                        }
+                                        
+                                        // Add ICM button
+                                        if(icm) {                                                
+                                                div_ClientID.innerHTML += '<span style="margin: 0px 0px 6px 6px; padding-top:4px; border-style: solid; border-width: 1px; border-radius: 5px; padding: 3px; font-size: .85em; font-weight: bold; background-image: url(\'https://raw.githubusercontent.com/allenvanderlinde/opsmarter/master/icm.png\')">ICM</span>';
                                         }
                                 }
                         });
